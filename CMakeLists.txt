@@ -1,49 +1,34 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(twist_mux)
+project(bhand_mux)
 
 find_package(catkin REQUIRED
     COMPONENTS
       roscpp
       std_msgs
-      geometry_msgs
       visualization_msgs
-      diagnostic_updater)
+      diagnostic_updater
+      joy_server
+)
 
 catkin_package(
     INCLUDE_DIRS include
     CATKIN_DEPENDS
       roscpp
       std_msgs
-      geometry_msgs
       visualization_msgs
+      joy_server
       diagnostic_updater)
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-add_executable(twist_mux
-    src/twist_mux.cpp
-    src/twist_mux_node.cpp
-    src/twist_mux_diagnostics.cpp)
-target_link_libraries(twist_mux ${catkin_LIBRARIES})
+add_executable(bhand_mux
+    src/bhand_mux.cpp
+    src/bhand_mux_node.cpp
+    src/bhand_mux_diagnostics.cpp)
+target_link_libraries(bhand_mux ${catkin_LIBRARIES})
 
-add_executable(twist_marker
-    src/twist_marker.cpp)
-target_link_libraries(twist_marker ${catkin_LIBRARIES})
+add_dependencies(bhand_mux ${catkin_EXPORTED_TARGETS})
 
-install(TARGETS twist_mux twist_marker
-    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-catkin_install_python(PROGRAMS scripts/joystick_relay.py
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-foreach(dir launch config)
-    install(DIRECTORY ${dir}/
-        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
-endforeach()
-
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-)
 
 if (CATKIN_ENABLE_TESTING)
     find_package(rostest REQUIRED)

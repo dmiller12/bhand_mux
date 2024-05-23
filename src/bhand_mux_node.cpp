@@ -19,21 +19,17 @@
  * @author Siegfried Gevatter
  */
 
+#include <bhand_mux/bhand_mux.h>
 #include <ros/ros.h>
-#include <twist_mux/twist_mux.h>
 
-int
-main(int argc, char *argv[])
-{
-  ros::init(argc, argv, "twist_mux");
+int main(int argc, char *argv[]) {
+    ros::init(argc, argv, "twist_mux");
 
-  twist_mux::TwistMux mux;
+    bhand_mux::BhandMux mux;
 
-  while (ros::ok())
-  {
-    ros::spin();
-  }
+    while (ros::ok()) {
+        ros::spin();
+    }
 
-  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
-
