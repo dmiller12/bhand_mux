@@ -22,7 +22,7 @@
 #ifndef TOPIC_HANDLE_H
 #define TOPIC_HANDLE_H
 
-#include <joy_server/BhandTeleop.h>
+#include <bhand_teleop_msgs/BhandTeleop.h>
 #include <ros/ros.h>
 #include <std_msgs/Bool.h>
 
@@ -102,9 +102,9 @@ template <typename T> class TopicHandle_ : boost::noncopyable {
     T msg_;
 };
 
-class VelocityTopicHandle : public TopicHandle_<joy_server::BhandTeleop> {
+class VelocityTopicHandle : public TopicHandle_<bhand_teleop_msgs::BhandTeleop> {
   private:
-    typedef TopicHandle_<joy_server::BhandTeleop> base_type;
+    typedef TopicHandle_<bhand_teleop_msgs::BhandTeleop> base_type;
 
   public:
     typedef typename base_type::priority_type priority_type;
@@ -117,7 +117,7 @@ class VelocityTopicHandle : public TopicHandle_<joy_server::BhandTeleop> {
 
     bool isMasked(priority_type lock_priority) const { return hasExpired() || (getPriority() < lock_priority); }
 
-    void callback(const joy_server::BhandTeleopConstPtr &msg) {
+    void callback(const bhand_teleop_msgs::BhandTeleopConstPtr &msg) {
         stamp_ = ros::Time::now();
         msg_ = *msg;
 

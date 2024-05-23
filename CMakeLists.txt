@@ -7,7 +7,7 @@ find_package(catkin REQUIRED
       std_msgs
       visualization_msgs
       diagnostic_updater
-      joy_server
+      bhand_teleop_msgs
 )
 
 catkin_package(
@@ -16,7 +16,7 @@ catkin_package(
       roscpp
       std_msgs
       visualization_msgs
-      joy_server
+      bhand_teleop_msgs
       diagnostic_updater)
 
 include_directories(include ${catkin_INCLUDE_DIRS})

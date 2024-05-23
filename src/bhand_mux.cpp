@@ -19,13 +19,13 @@
  * @author Siegfried Gevatter
  */
 
-#include "joy_server/BhandTeleop.h"
 #include <bhand_mux/bhand_mux.h>
 #include <bhand_mux/bhand_mux_diagnostics.h>
 #include <bhand_mux/bhand_mux_diagnostics_status.h>
 #include <bhand_mux/topic_handle.h>
 #include <bhand_mux/utils.h>
 #include <bhand_mux/xmlrpc_helpers.h>
+#include <bhand_teleop_msgs/BhandTeleop.h>
 
 /**
  * @brief hasIncreasedAbsVelocity Check if the absolute velocity has increased
@@ -34,7 +34,8 @@
  * @param new_bhand New velocity
  * @return true is any of the absolute velocity components has increased
  */
-bool hasIncreasedAbsVelocity(const joy_server::BhandTeleop &old_bhand, const joy_server::BhandTeleop &new_bhand) {
+bool hasIncreasedAbsVelocity(const bhand_teleop_msgs::BhandTeleop &old_bhand,
+                             const bhand_teleop_msgs::BhandTeleop &new_bhand) {
     const auto old_spread = std::abs(old_bhand.spread);
     const auto new_spread = std::abs(new_bhand.spread);
 
@@ -57,7 +58,7 @@ BhandMux::BhandMux(int window_size) {
     getTopicHandles(nh, nh_priv, "locks", *lock_hs_);
 
     /// Publisher for output topic:
-    cmd_pub_ = nh.advertise<joy_server::BhandTeleop>("cmd_vel_out", 1);
+    cmd_pub_ = nh.advertise<bhand_teleop_msgs::BhandTeleop>("cmd_vel_out", 1);
 
     /// Diagnostics:
     diagnostics_ = boost::make_shared<diagnostics_type>();
@@ -75,7 +76,7 @@ void BhandMux::updateDiagnostics(const ros::TimerEvent &event) {
     diagnostics_->updateStatus(status_);
 }
 
-void BhandMux::publishBhand(const joy_server::BhandTeleopConstPtr &msg) { cmd_pub_.publish(*msg); }
+void BhandMux::publishBhand(const bhand_teleop_msgs::BhandTeleopConstPtr &msg) { cmd_pub_.publish(*msg); }
 
 template <typename T>
 void BhandMux::getTopicHandles(ros::NodeHandle &nh, ros::NodeHandle &nh_priv, const std::string &param_name,
