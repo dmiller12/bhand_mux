@@ -16,3 +16,8 @@ topics:
   topic   : oculus_teleop/bhand_vel
   timeout : 0.5
   priority: 10
+-
+  name    : nav_controller
+  topic   : nav_controller_teleop/bhand_vel
+  timeout : 0.5
+  priority: 10
