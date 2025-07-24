@@ -22,7 +22,7 @@
 #ifndef BHAND_MUX_H
 #define BHAND_MUX_H
 
-#include <bhand_teleop_msgs/BhandTeleop.h>
+#include <gripper_ros_common/VelocitySetpoint.h>
 #include <ros/ros.h>
 #include <std_msgs/Bool.h>
 
@@ -54,7 +54,7 @@ class BhandMux {
 
     bool hasPriority(const VelocityTopicHandle &twist);
 
-    void publishBhand(const bhand_teleop_msgs::BhandTeleopConstPtr &msg);
+    void publishBhand(const gripper_ros_common::VelocitySetpointConstPtr &msg);
 
     void updateDiagnostics(const ros::TimerEvent &event);
 
@@ -80,8 +80,7 @@ class BhandMux {
 
     ros::Publisher cmd_pub_;
 
-    bhand_teleop_msgs::BhandTeleop last_cmd_;
-
+  gripper_ros_common::VelocitySetpoint last_cmd_;
     template <typename T>
     void getTopicHandles(ros::NodeHandle &nh, ros::NodeHandle &nh_priv, const std::string &param_name,
                          std::list<T> &topic_hs);

@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="cmd_vel_out" default="bhand_mux/bhand_vel"/>
+  <arg name="cmd_vel_out" default="bhand_node/velocity_setpoint"/>
 
   <arg name="config_locks"  default="$(find bhand_mux)/config/bhand_mux_locks.yaml"/>
   <arg name="config_topics" default="$(find bhand_mux)/config/bhand_mux_topics.yaml"/>
